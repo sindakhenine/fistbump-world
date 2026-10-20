@@ -48,6 +48,7 @@ footer {
   gap: 16px;
 }
 footer {
+  justify-content: flex-end;
   font-size: 13px;
   color: var(--lichen);
   border-top: 1px solid var(--trail);
