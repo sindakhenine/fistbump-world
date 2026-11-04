@@ -326,5 +326,35 @@
         <span>© 2026 Fistbump</span>
       </span>
     </footer>
+    <script>
+      // One visit to this page, added to a daily total for the team (public.count_visit), and while
+      // the page is in front one beat a minute to that minute's total, for "online now"
+      // (public.site_beat). No cookie, nothing stored in the browser, nothing about the visitor is
+      // sent or kept. The key is the app's public one, the same as in app.fistbump.world.
+      (function () {
+        var server = 'https://xhuhqgfvrtgdiqsxekig.supabase.co/rest/v1/rpc/';
+        var publishable = 'sb_publishable_MYZH6o37FvHN8azleJ57rA_O2DA0aAM';
+        var last = 0;
+        function send(name, body) {
+          fetch(server + name, {
+            method: 'POST',
+            headers: { apikey: publishable, 'Content-Type': 'application/json' },
+            body: body,
+            keepalive: true,
+            credentials: 'omit',
+            referrerPolicy: 'no-referrer',
+          }).catch(function () {});
+        }
+        function beat() {
+          if (document.visibilityState !== 'visible' || Date.now() - last < 55000) return;
+          last = Date.now();
+          send('site_beat', '{}');
+        }
+        send('count_visit', '{"page":"website","surface":"web"}');
+        beat();
+        setInterval(beat, 60000);
+        document.addEventListener('visibilitychange', beat);
+      })();
+    </script>
   </body>
 </html>
