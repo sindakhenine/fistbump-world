@@ -1,3 +1,5 @@
+/* The colours are the shared chart (tokens.css, the same file as the app's src/theme/tokens.css). */
+@import url('/tokens.css');
 @font-face {
   font-family: 'Bricolage Grotesque';
   src: url('/fonts/BricolageGrotesque_800ExtraBold.ttf') format('truetype');
@@ -17,12 +19,11 @@
   font-display: swap;
 }
 :root {
-  --paper: #fafbf6;
-  --forest: #1e3a2c;
-  --moss: #46594d;
-  --lichen: #5f7266;
-  --trail: #dce4d3;
   color-scheme: light;
+}
+a:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
 }
 * {
   box-sizing: border-box;
@@ -87,7 +88,7 @@ h1 {
   margin: 12px 0 8px;
 }
 h2 {
-  font-size: 19px;
+  font-size: 20px;
   font-weight: 800;
   margin: 36px 0 8px;
 }
