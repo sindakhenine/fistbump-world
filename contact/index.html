@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Contact · Fistbump</title>
+    <meta name="description" content="Write to the Fistbump team. We answer by email." />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/legal.css" />
+    <style>
+      form,
+      .done {
+        margin-top: 24px;
+        max-width: 560px;
+      }
+      .field {
+        display: block;
+        margin-bottom: 20px;
+      }
+      .label {
+        display: block;
+        margin-bottom: 6px;
+        font-weight: 800;
+        color: var(--forest);
+      }
+      .label small {
+        font-weight: 500;
+        color: var(--lichen);
+      }
+      input,
+      textarea {
+        display: block;
+        width: 100%;
+        padding: 12px 14px;
+        border: 1.5px solid var(--trail);
+        border-radius: var(--r-sm);
+        background: var(--card);
+        color: var(--forest);
+        font:
+          500 16px/1.5 Manrope,
+          system-ui,
+          sans-serif;
+      }
+      textarea {
+        min-height: 180px;
+        resize: vertical;
+      }
+      input:focus-visible,
+      textarea:focus-visible,
+      button:focus-visible {
+        outline: 3px solid var(--focus);
+        outline-offset: 2px;
+      }
+      .hint {
+        display: block;
+        margin-top: 6px;
+        font-size: 13px;
+        color: var(--lichen);
+      }
+      .count {
+        text-align: end;
+      }
+      /* People never see this field; bots fill it in. */
+      .trap {
+        position: absolute;
+        left: -10000px;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+      }
+      .fine {
+        font-size: 14px;
+      }
+      button {
+        min-height: 52px;
+        padding: 0 32px;
+        border: 0;
+        border-radius: var(--r-md);
+        background: var(--forest);
+        color: var(--paper);
+        font:
+          800 17px/1.2 Manrope,
+          system-ui,
+          sans-serif;
+        cursor: pointer;
+        box-shadow: var(--shadow-raise);
+      }
+      button:hover {
+        background: var(--forest-hover);
+      }
+      button:disabled {
+        opacity: 0.6;
+        cursor: wait;
+      }
+      .problem {
+        margin: 0 0 16px;
+        padding: 12px 14px;
+        border-radius: var(--r-sm);
+        background: #fdecea;
+        color: var(--danger);
+        font-weight: 800;
+      }
+      .done {
+        padding: 20px;
+        border-radius: var(--r-md);
+        background: var(--meadow);
+      }
+      .done h2 {
+        margin-top: 0;
+      }
+      @media (max-width: 520px) {
+        button {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a class="brand" href="/"><img src="/favicon.svg" alt="" />fistbump</a>
+    </header>
+    <main>
+      <h1>Contact us</h1>
+      <p>
+        Write to the Fistbump team and we answer by email. You can also write to
+        <a href="mailto:contact@skatalystai.com">contact@skatalystai.com</a>. To report a member or
+        something you saw in the app, see <a href="/support/">Support</a>.
+      </p>
+      <noscript>
+        <p class="problem">This form needs JavaScript. Write to contact@skatalystai.com instead.</p>
+      </noscript>
+
+      <form id="contact" hidden>
+        <p class="problem" id="problem" role="alert" hidden></p>
+        <label class="field">
+          <span class="label">Your email</span>
+          <input
+            type="email"
+            name="email"
+            autocomplete="email"
+            maxlength="254"
+            required
+            aria-describedby="email-note"
+          />
+          <small class="hint" id="email-note">We answer to this address.</small>
+        </label>
+        <label class="field">
+          <span class="label">Your name <small>(optional)</small></span>
+          <input type="text" name="name" autocomplete="name" maxlength="80" />
+        </label>
+        <label class="field">
+          <span class="label">Message</span>
+          <textarea name="message" maxlength="2000" required aria-describedby="count"></textarea>
+          <small class="hint count" id="count">0 of 2,000 characters</small>
+        </label>
+        <div class="trap" aria-hidden="true">
+          <label
+            >Leave this empty <input type="text" name="website" tabindex="-1" autocomplete="off"
+          /></label>
+        </div>
+        <p class="fine">
+          We use your message only to answer it, and delete it from Fistbump after 6 months. More in
+          the <a href="/privacy/#contact-form">privacy policy</a>.
+        </p>
+        <button type="submit">Send</button>
+      </form>
+
+      <section class="done" id="done" role="status" hidden>
+        <h2>Thank you, your message reached us.</h2>
+        <p>We’ll answer by email at <strong id="done-email"></strong>.</p>
+        <p><a href="/">Back to fistbump.world</a></p>
+      </section>
+    </main>
+    <footer>
+      <span class="links"
+        ><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="/support/">Support</a
+        ><a href="/contact/">Contact</a><a href="/impressum/">Impressum</a></span
+      >
+    </footer>
+    <script>
+      // Sends the form to the contact-message function (supabase/functions/contact-message),
+      // which saves it for the team and emails it on. Nothing is stored in the browser.
+      (function () {
+        var form = document.getElementById('contact');
+        var problem = document.getElementById('problem');
+        var done = document.getElementById('done');
+        var count = document.getElementById('count');
+        var button = form.querySelector('button');
+        var message = form.elements.message;
+        form.hidden = false;
+        function show(text) {
+          problem.textContent = text;
+          problem.hidden = !text;
+        }
+        message.addEventListener('input', function () {
+          count.textContent = message.value.length.toLocaleString('en-GB') + ' of 2,000 characters';
+        });
+        form.addEventListener('submit', function (event) {
+          event.preventDefault();
+          if (!form.reportValidity()) return;
+          show('');
+          button.disabled = true;
+          button.textContent = 'Sending…';
+          var email = form.elements.email.value.trim();
+          fetch('https://xhuhqgfvrtgdiqsxekig.supabase.co/functions/v1/contact-message', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              email: email,
+              name: form.elements.name.value,
+              message: message.value,
+              website: form.elements.website.value,
+            }),
+            credentials: 'omit',
+            referrerPolicy: 'no-referrer',
+          })
+            .then(function (response) {
+              return response.json().then(
+                function (body) {
+                  return { ok: response.ok && body && body.ok, body: body };
+                },
+                function () {
+                  return { ok: false, body: null };
+                },
+              );
+            })
+            .then(function (result) {
+              if (!result.ok) throw { plain: result.body && result.body.error };
+              document.getElementById('done-email').textContent = email;
+              form.hidden = true;
+              done.hidden = false;
+              done.scrollIntoView({ block: 'nearest' });
+            })
+            .catch(function (error) {
+              show(
+                (error && error.plain) ||
+                  'Your message could not be sent. Check your connection and try again, or write to contact@skatalystai.com.',
+              );
+              button.disabled = false;
+              button.textContent = 'Send';
+              problem.scrollIntoView({ block: 'nearest' });
+            });
+        });
+      })();
+    </script>
+  </body>
+</html>
