@@ -119,34 +119,72 @@
         text-align: center;
         padding: 8px 16px 24px;
       }
-      /* The app's own 3D parachute and chest (the pictures members see when someone lands). */
+      /* The app's own 3D parachute (the one members land with), carrying the Fistbump logo on a
+         round shiny badge. When it lands the logo lights up in gold, like the owner's video. */
       .sky {
         width: min(230px, 26svh, 50vw);
       }
       .parachute {
         position: relative;
         display: block;
-        aspect-ratio: 286 / 330;
+        aspect-ratio: 286 / 360;
         transform-origin: 50% 14%;
         animation:
           drop 2.8s cubic-bezier(0.2, 0.75, 0.25, 1) both,
           sway 6s ease-in-out 2.8s infinite;
       }
-      .parachute img {
-        position: absolute;
-        left: 50%;
-        translate: -50% 0;
-        height: auto;
-      }
       .chute {
+        position: absolute;
         top: 0;
+        left: 0;
         width: 100%;
+        height: auto;
         filter: drop-shadow(0 10px 14px #1e3a2c26);
       }
-      .chest {
-        bottom: 0;
-        width: 42%;
-        filter: drop-shadow(0 8px 10px #1e3a2c33);
+      /* Drawn in the picture's own units (286 wide), so the strings meet the badge. */
+      .badge {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: auto;
+        overflow: visible;
+      }
+      .badge-ball {
+        filter: drop-shadow(0 8px 10px #1e3a2c40);
+      }
+      .badge-light {
+        animation: light-up 1.1s cubic-bezier(0.2, 1.4, 0.4, 1) 2.3s both;
+      }
+      .badge-rays {
+        animation: spin 40s linear 2.3s infinite;
+      }
+      .badge-halo {
+        animation: glow 3.2s ease-in-out 3.4s infinite;
+      }
+      .badge-sparkles use {
+        animation: twinkle 2.6s ease-in-out infinite both;
+      }
+      .badge-sparkles g:nth-child(1) use {
+        animation-delay: 2.6s;
+      }
+      .badge-sparkles g:nth-child(2) use {
+        animation-delay: 3.4s;
+      }
+      .badge-sparkles g:nth-child(3) use {
+        animation-delay: 2.9s;
+      }
+      .badge-sparkles g:nth-child(4) use {
+        animation-delay: 3.9s;
+      }
+      .badge-sparkles g:nth-child(5) use {
+        animation-delay: 3.1s;
+      }
+      .badge-sparkles g:nth-child(6) use {
+        animation-delay: 4.2s;
+      }
+      .badge-sparkles g:nth-child(7) use {
+        animation-delay: 3.6s;
       }
       h1 {
         margin: clamp(18px, 3.5svh, 34px) 0 0;
@@ -247,8 +285,44 @@
           rotate: -2.5deg;
         }
       }
+      @keyframes light-up {
+        from {
+          opacity: 0;
+          scale: 0.3;
+        }
+        to {
+          opacity: 1;
+          scale: 1;
+        }
+      }
+      @keyframes spin {
+        to {
+          rotate: 360deg;
+        }
+      }
+      @keyframes glow {
+        50% {
+          opacity: 0.6;
+          scale: 0.92;
+        }
+      }
+      @keyframes twinkle {
+        0%,
+        100% {
+          opacity: 0;
+          scale: 0.2;
+        }
+        50% {
+          opacity: 1;
+          scale: 1;
+        }
+      }
       @media (prefers-reduced-motion: reduce) {
-        .parachute {
+        .parachute,
+        .badge-light,
+        .badge-rays,
+        .badge-halo,
+        .badge-sparkles use {
           animation: none;
         }
         .follow {
@@ -268,7 +342,112 @@
       <div class="sky" aria-hidden="true">
         <span class="parachute">
           <img class="chute" src="/art/parachute.webp" alt="" width="286" height="275" />
-          <img class="chest" src="/art/chest.webp" alt="" width="331" height="342" />
+          <svg class="badge" viewBox="0 0 286 400" width="286" height="400">
+            <defs>
+              <radialGradient id="badge-halo" cx="0" cy="0" r="120" gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="#ffd43b" stop-opacity=".9" />
+                <stop offset=".48" stop-color="#ffd43b" stop-opacity=".55" />
+                <stop offset=".72" stop-color="#f5bd4f" stop-opacity=".18" />
+                <stop offset="1" stop-color="#f5bd4f" stop-opacity="0" />
+              </radialGradient>
+              <radialGradient id="badge-ray" cx="0" cy="0" r="100" gradientUnits="userSpaceOnUse">
+                <stop offset=".5" stop-color="#ffc94a" stop-opacity=".8" />
+                <stop offset="1" stop-color="#ffc94a" stop-opacity="0" />
+              </radialGradient>
+              <linearGradient id="badge-rim" y1="-60" y2="60" x2="0" gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="#b4f0c8" />
+                <stop offset=".5" stop-color="#3c7d59" />
+                <stop offset="1" stop-color="#0f2a1d" />
+              </linearGradient>
+              <radialGradient
+                id="badge-body"
+                cx="-20"
+                cy="-28"
+                r="88"
+                gradientUnits="userSpaceOnUse"
+              >
+                <stop offset="0" stop-color="#5bb383" />
+                <stop offset=".5" stop-color="#24553c" />
+                <stop offset="1" stop-color="#10291d" />
+              </radialGradient>
+              <radialGradient id="badge-warm" cx="0" cy="0" r="48" gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="#ffd43b" stop-opacity=".45" />
+                <stop offset="1" stop-color="#ffd43b" stop-opacity="0" />
+              </radialGradient>
+              <linearGradient
+                id="badge-shine"
+                y1="-56"
+                y2="-16"
+                x2="0"
+                gradientUnits="userSpaceOnUse"
+              >
+                <stop offset="0" stop-color="#fff" stop-opacity=".7" />
+                <stop offset="1" stop-color="#fff" stop-opacity="0" />
+              </linearGradient>
+              <linearGradient id="badge-spark" y1="-8" y2="8" x2="0" gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="#fffbe0" />
+                <stop offset="1" stop-color="#ffc21a" />
+              </linearGradient>
+              <filter id="badge-glow" x="-30%" y="-30%" width="160%" height="160%">
+                <feGaussianBlur in="SourceAlpha" stdDeviation="2.6" result="blur" />
+                <feFlood flood-color="#ffd43b" />
+                <feComposite in2="blur" operator="in" result="gold" />
+                <feMerge>
+                  <feMergeNode in="gold" />
+                  <feMergeNode in="gold" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+              <filter id="badge-soft" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur stdDeviation="1.6" />
+              </filter>
+              <path id="badge-star" d="M0-8C1-2 2-1 8 0C2 1 1 2 0 8C-1 2-2 1-8 0C-2-1-1-2 0-8Z" />
+            </defs>
+            <!-- The parachute's strings, carried on down to the badge. -->
+            <path
+              d="M84.8 256L99.8 274.8M93.6 256L102.2 270.4M104 240L111.6 260.2M109 240L113.6 258.4M121.1 232L123.2 252.5M160.6 216L159.7 248.2M165.5 216L161.4 248.6M200.1 232L190.9 265.9M209.8 240L198.3 275.8M212.8 248L199.2 278.1M217.4 248L199 278.6"
+              stroke="#c9cdcf"
+              stroke-width="1.8"
+              stroke-linecap="round"
+            />
+            <g transform="translate(148 304)">
+              <g class="badge-light">
+                <circle class="badge-halo" r="120" fill="url(#badge-halo)" />
+                <path
+                  class="badge-rays"
+                  fill="url(#badge-ray)"
+                  filter="url(#badge-soft)"
+                  d="M0 0L-5.2-99.9L5.2-99.9ZM0 0L25.7-69.4L30.9-67.2ZM0 0L66.9-74.3L74.3-66.9ZM0 0L67.2-30.9L69.4-25.7ZM0 0L99.9-5.2L99.9 5.2ZM0 0L69.4 25.7L67.2 30.9ZM0 0L74.3 66.9L66.9 74.3ZM0 0L30.9 67.2L25.7 69.4ZM0 0L5.2 99.9L-5.2 99.9ZM0 0L-25.7 69.4L-30.9 67.2ZM0 0L-66.9 74.3L-74.3 66.9ZM0 0L-67.2 30.9L-69.4 25.7ZM0 0L-99.9 5.2L-99.9-5.2ZM0 0L-69.4-25.7L-67.2-30.9ZM0 0L-74.3-66.9L-66.9-74.3ZM0 0L-30.9-67.2L-25.7-69.4Z"
+                />
+              </g>
+              <g class="badge-ball">
+                <circle r="60" fill="url(#badge-rim)" />
+                <circle r="54.5" fill="url(#badge-body)" />
+                <circle r="48" fill="url(#badge-warm)" />
+                <!-- The Fistbump logo, as in the app icon. -->
+                <path
+                  d="M7 24L13 18L20 18L24 23L24 29L18 32L12 30L7 33M41 24L35 18L28 18L24 23L24 29L30 32L36 30L41 33M19 18V24H15M29 18V24H33M24 10V13M16 11L18 14M32 11L30 14"
+                  transform="translate(-52.8 -47.3) scale(2.2)"
+                  fill="none"
+                  stroke="#fffdf5"
+                  stroke-width="2.4"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  filter="url(#badge-glow)"
+                />
+                <ellipse cy="-36" rx="38" ry="19" fill="url(#badge-shine)" />
+              </g>
+              <g class="badge-sparkles" fill="url(#badge-spark)">
+                <g transform="translate(-96 -14) scale(2)"><use href="#badge-star" /></g>
+                <g transform="translate(90 -40) scale(1.5)"><use href="#badge-star" /></g>
+                <g transform="translate(104 26) scale(2.2)"><use href="#badge-star" /></g>
+                <g transform="translate(-84 50) scale(1.4)"><use href="#badge-star" /></g>
+                <g transform="translate(-44 84) scale(1.7)"><use href="#badge-star" /></g>
+                <g transform="translate(60 78) scale(1.5)"><use href="#badge-star" /></g>
+                <g transform="translate(-112 -64) scale(1.1)"><use href="#badge-star" /></g>
+              </g>
+            </g>
+          </svg>
         </span>
       </div>
       <h1>Fistbump is coming soon.</h1>
@@ -286,7 +465,8 @@
     <footer>
       <span class="links">
         <a href="/privacy/">Privacy</a>
-        <a href="/terms/">Terms</a><a href="/support/">Support</a><a href="/contact/">Contact</a><a href="/impressum/">Impressum</a>
+        <a href="/terms/">Terms</a><a href="/support/">Support</a><a href="/contact/">Contact</a
+        ><a href="/impressum/">Impressum</a>
         <a href="https://app.fistbump.world/sponsor">Become a World Partner</a>
         <span>© 2026 Fistbump</span>
       </span>
