@@ -197,47 +197,10 @@
         text-wrap: balance;
         max-width: 14ch;
       }
-      p {
-        margin: clamp(16px, 2.6svh, 24px) auto clamp(24px, 4svh, 36px);
-        max-width: 32ch;
-        font-size: clamp(17px, 1.6vw, 19px);
-        line-height: 1.55;
-        color: var(--moss);
-        text-wrap: balance;
-      }
-      .follow {
-        display: inline-flex;
-        align-items: center;
-        gap: 12px;
-        min-height: 56px;
-        padding: 0 28px;
-        border-radius: var(--r-md);
-        background: var(--forest);
-        color: var(--paper);
-        font:
-          800 17px/1.2 Manrope,
-          system-ui,
-          sans-serif;
-        text-decoration: none;
-        box-shadow: var(--shadow-raise);
-        transition:
-          background 0.18s,
-          transform 0.18s;
-      }
-      .follow:hover {
-        background: var(--forest-hover);
-        transform: translateY(-2px);
-      }
-      .follow:focus-visible,
       .brand:focus-visible,
       footer a:focus-visible {
         outline: 3px solid var(--focus);
         outline-offset: 3px;
-      }
-      .follow svg {
-        width: 20px;
-        height: 20px;
-        flex-shrink: 0;
       }
       footer {
         font-size: 13px;
@@ -324,9 +287,6 @@
         .badge-halo,
         .badge-sparkles use {
           animation: none;
-        }
-        .follow {
-          transition: none;
         }
       }
     </style>
@@ -451,16 +411,6 @@
         </span>
       </div>
       <h1>Fistbump is coming soon.</h1>
-      <p>A new app for builders. The first look goes out on X.</p>
-      <a class="follow" href="https://x.com/skatalystai" rel="noopener">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path
-            fill="currentColor"
-            d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3l-4.9-7.4L5.5 22H2.3l7.4-8.5L1 2h6.5l4.5 6.8L18.9 2Zm-1.1 18h1.7L6.6 3.9H4.8L17.8 20Z"
-          />
-        </svg>
-        Follow @skatalystai on X
-      </a>
     </main>
     <footer>
       <span class="links">
