@@ -131,7 +131,7 @@
         transform-origin: 50% 14%;
         animation:
           drop 2.8s cubic-bezier(0.2, 0.75, 0.25, 1) both,
-          sway 6s ease-in-out 2.8s infinite;
+          sway 4.8s ease-in-out 2.8s infinite;
       }
       .chute {
         position: absolute;
@@ -154,13 +154,12 @@
         filter: drop-shadow(0 8px 10px #1e3a2c40);
       }
       .badge-light {
-        animation: light-up 1.1s cubic-bezier(0.2, 1.4, 0.4, 1) 2.3s both;
-      }
-      .badge-rays {
-        animation: spin 40s linear 2.3s infinite;
+        animation:
+          light-up 1.1s cubic-bezier(0.2, 1.4, 0.4, 1) 2.3s both,
+          blink 1.8s ease-in-out 3.4s infinite;
       }
       .badge-halo {
-        animation: glow 3.2s ease-in-out 3.4s infinite;
+        animation: glow 1.8s ease-in-out 3.4s infinite;
       }
       .badge-sparkles use {
         animation: twinkle 2.6s ease-in-out infinite both;
@@ -277,12 +276,19 @@
         0%,
         100% {
           rotate: 0deg;
+          translate: 0 0;
         }
         25% {
-          rotate: 2.5deg;
+          rotate: 5deg;
+          translate: 0 -10px;
+        }
+        50% {
+          rotate: 0deg;
+          translate: 0 4px;
         }
         75% {
-          rotate: -2.5deg;
+          rotate: -5deg;
+          translate: 0 -10px;
         }
       }
       @keyframes light-up {
@@ -295,15 +301,19 @@
           scale: 1;
         }
       }
-      @keyframes spin {
-        to {
-          rotate: 360deg;
-        }
-      }
       @keyframes glow {
         50% {
-          opacity: 0.6;
-          scale: 0.92;
+          opacity: 0.3;
+          scale: 0.82;
+        }
+      }
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.25;
         }
       }
       @keyframes twinkle {
@@ -320,7 +330,6 @@
       @media (prefers-reduced-motion: reduce) {
         .parachute,
         .badge-light,
-        .badge-rays,
         .badge-halo,
         .badge-sparkles use {
           animation: none;
