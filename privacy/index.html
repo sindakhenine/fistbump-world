@@ -14,7 +14,7 @@
     </header>
     <main>
       <h1>Privacy policy</h1>
-      <p class="updated">Last updated 7 November 2026</p>
+      <p class="updated">Last updated 11 November 2026</p>
 
       <h2>Who is responsible</h2>
       <p>
@@ -301,11 +301,37 @@
         <strong>The Season</strong>: if you join the Season competition, your name, photo, country
         and points are shown to other members on the Season board, as described in the
         <a href="https://app.fistbump.world/rules">Season rules</a>. Points are counted from
-        meetings both people confirmed, once one of them added the fistbump photo. If the Season has an award, you tell us when you join where
+        meetings both people confirmed, once one of them added a live fistbump photo taken in the
+        app and that photo passed the check below. When you confirm a meeting you also give the
+        country it happened in; it decides whether the meeting counts as home (1 point) or as a
+        trip (8 points) for you. If the Season has an award, you tell us when you join where
         you’d like to go and when, so the award fits; only the Fistbump team sees this. After a Season
         ends and before we announce a winner, we may check the top 3’s accounts and meetings, and
         the live photos from their meetings in that Season, to keep the competition fair (Art.
         6(1)(b) and (f) GDPR).
+      </p>
+      <p>
+        <strong>The photo check (Season)</strong>: every live fistbump photo taken in the app for
+        a meeting that falls in a Season is checked automatically, usually within a day, by
+        Claude, an AI model run by Anthropic, PBC (USA), our processor for this check. We send the
+        photo and nothing else: no names, handles, ids, dates, places or the pose. The model
+        answers three fixed questions: how many clear faces the photo shows, whether a fistbump is
+        visible, and whether it is a real camera photo rather than a generated, edited or
+        re-photographed one. It is told not to describe or identify anyone, and we store only the
+        verdict and a short reason code, never the model’s words. The check counts faces; it never
+        matches a face against your profile photo or anyone else’s, and no biometric template is
+        made. Before the photo is sent, our own server compares a coarse fingerprint of the image
+        (64 bits, not a face) with earlier meeting photos to spot a photo used twice; that
+        fingerprint stays with us. Anthropic processes the photo on servers in the United States
+        under its data processing agreement with the EU’s standard contractual clauses, uses it
+        only to give us the answer, does not train on it, and deletes it from its systems within
+        30 days. If a photo is not accepted, both people are told why, can take one new live photo
+        together within 7 days, and can then ask the Fistbump team to look once; a team member
+        then opens the photo, and that is logged like every other photo access. We do this to keep
+        the Season fair and to prevent fraud (Art. 6(1)(f) GDPR, and Art. 6(1)(b) under the Season
+        rules you accept when you join). No decision about you is made by the model alone: the
+        only effect of a refused photo is that a meeting gives no Season points, and you can
+        always ask a person to review it.
       </p>
       <p>
         <strong>Meeting photos</strong>: a photo you add of a meeting is stored privately and shown
@@ -454,6 +480,11 @@
           server’s lookups of website addresses (see “Your website’s icon”).
         </li>
         <li>
+          <strong>Anthropic</strong> (Anthropic, PBC, USA) runs the Claude model that checks the
+          Season’s live fistbump photos, as described under “The photo check” above. It receives
+          only the photo, keeps it at most 30 days and does not train on it.
+        </li>
+        <li>
           <strong>A research tool</strong>, if we use one for Event Radar or Opportunities (for
           example xAI’s Grok), searches public pages and posts for us. It receives no data about
           Fistbump members.
@@ -470,12 +501,12 @@
         </li>
       </ul>
       <p>
-        Supabase, Expo, Cloudflare, GitHub and Resend process personal data on our behalf
+        Supabase, Expo, Cloudflare, GitHub, Resend and Anthropic process personal data on our behalf
         (processors, Art. 28 GDPR). Stripe, Apple, Google and X Corp. handle the data they receive under their own
         privacy policies.
       </p>
       <p>
-        Some of these providers are based in the USA (Expo, X Corp., GitHub, Cloudflare, Resend) or may
+        Some of these providers are based in the USA (Expo, X Corp., GitHub, Cloudflare, Resend, Anthropic) or may
         process data outside the EU. We are confirming for each of them which safeguard applies to
         the transfer (the EU–US Data Privacy Framework or the EU’s standard contractual clauses) and
         will list it here; until then, write to us for the current state.
@@ -511,7 +542,9 @@
         Going 90 days after the event, app view codes shortly after midnight, app view totals after 400
         days, profile visit codes shortly after midnight, weekly profile numbers after 8 weeks, and
         the notes we keep to stop abuse within 3 days. Events are deleted 400 days after
-        they end, and messages from the contact form 6 months after they were sent.
+        they end, and messages from the contact form 6 months after they were sent. The verdict of
+        a Season photo check (valid or not, and the reason code) stays with the meeting it belongs
+        to; the copy of the photo sent to Anthropic is deleted there within 30 days.
       </p>
 
       <h2>Your rights</h2>
