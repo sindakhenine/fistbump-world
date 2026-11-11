@@ -479,7 +479,10 @@
           <strong>Cloudflare</strong> (Cloudflare, Inc., USA) connects the devices for voice in
           games and relays the encrypted voice when they can’t connect directly. It receives the
           players’ IP addresses, never what is said. Its public DNS service also answers our
-          server’s lookups of website addresses (see “Your website’s icon”).
+          server’s lookups of website addresses (see “Your website’s icon”). Its security check
+          (Turnstile) runs on the email sign-in form, which only logins made by the team use (App
+          Store review, for example), to tell a person from a script. There it receives the
+          visitor’s IP address and details of the browser. Signing in with X never shows it.
         </li>
         <li>
           <strong>Anthropic</strong> (Anthropic, PBC, USA) runs the Claude model that checks the
