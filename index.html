@@ -238,6 +238,34 @@
         height: 20px;
         flex-shrink: 0;
       }
+      /* The live line: online now and visits today (public.public_stats), and the stats page.
+         The dot is the app's live green (the /admin and /stats dots). */
+      .live {
+        display: inline-flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 4px 12px;
+        margin: 20px 0 0;
+        max-width: none;
+        font-size: var(--fs-label);
+        color: var(--moss);
+      }
+      .live-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: var(--r-pill);
+        background: #2fb36a;
+        box-shadow: 0 0 0 4px #2fb36a26;
+      }
+      .live a {
+        color: var(--forest);
+        font-weight: 800;
+      }
+      .live a:focus-visible {
+        outline: 3px solid var(--focus);
+        outline-offset: 3px;
+      }
       footer {
         font-size: 13px;
         color: var(--lichen);
@@ -470,6 +498,11 @@
         </svg>
         Follow @skatalystai on X
       </a>
+      <p class="live">
+        <span class="live-dot" id="live-dot" aria-hidden="true" hidden></span>
+        <span id="live-text"></span>
+        <a href="https://app.fistbump.world/stats">Live stats</a>
+      </p>
     </main>
     <footer>
       <span class="links">
@@ -499,6 +532,42 @@
             referrerPolicy: 'no-referrer',
           }).catch(function () {});
         }
+        // "12 online · 340 visits today": totals only, and a number under 3 comes back empty, so
+        // it isn't shown (the same as app.fistbump.world/stats).
+        var dot = document.getElementById('live-dot');
+        var text = document.getElementById('live-text');
+        function count(n) {
+          return typeof n === 'number' && n >= 3 ? n.toLocaleString('en-GB') : '';
+        }
+        // When the numbers can't load, the line goes: an old count is not shown as live.
+        function clear() {
+          dot.hidden = true;
+          text.textContent = '';
+        }
+        function show() {
+          if (document.visibilityState !== 'visible') return;
+          fetch(server + 'public_stats', {
+            method: 'POST',
+            headers: { apikey: publishable, 'Content-Type': 'application/json' },
+            body: '{}',
+            credentials: 'omit',
+            referrerPolicy: 'no-referrer',
+          })
+            .then(function (r) {
+              return r.ok ? r.json() : null;
+            })
+            .then(function (s) {
+              if (!s) return clear();
+              var online = count(s.online);
+              var visits = count(s.visits_today);
+              var parts = [];
+              if (online) parts.push(online + ' online');
+              if (visits) parts.push(visits + ' visits today');
+              dot.hidden = !online;
+              text.textContent = parts.join(' · ');
+            })
+            .catch(clear);
+        }
         function beat() {
           if (document.visibilityState !== 'visible' || Date.now() - last < 55000) return;
           last = Date.now();
@@ -508,6 +577,8 @@
         beat();
         setInterval(beat, 60000);
         document.addEventListener('visibilitychange', beat);
+        show();
+        setInterval(show, 60000);
       })();
     </script>
   </body>
