@@ -69,6 +69,20 @@
   --r-md: 16px;
   --r-lg: 24px;
   --r-pill: 999px;
+  /* The design rules of 10 November 2026 (docs/design-proposal-10nov): three radii (controls,
+     cards, sheets), one control height (48, small 36, round icon 40) and a 4 px space scale.
+     src/world/ui.css builds the shared button, card and row classes from them. */
+  --r-control: 12px;
+  --r-card: 20px;
+  --r-sheet: 28px;
+  --control: 48px;
+  --control-small: 36px;
+  --control-icon: 40px;
+  --s2: 8px;
+  --s3: 12px;
+  --s4: 16px;
+  --s6: 24px;
+  --s8: 32px;
   --shadow-float: 0 1px 2px #1e3a2c0f, 0 6px 22px #1e3a2c12;
   --shadow-raise: 0 1px 0 #ffffff1f inset, 0 10px 24px #1e3a2c2e;
   --shadow-dialog: 0 30px 130px #1d34284d;
