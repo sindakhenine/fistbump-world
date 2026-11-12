@@ -192,9 +192,18 @@
           problem.textContent = text;
           problem.hidden = !text;
         }
-        message.addEventListener('input', function () {
+        function counted() {
           count.textContent = message.value.length.toLocaleString('en-GB') + ' of 2,000 characters';
-        });
+        }
+        message.addEventListener('input', counted);
+        // Opened from the app's Plus window ("Write to us"): the member's reference comes after
+        // the # (that part of an address is never sent to a server) and starts the message, so
+        // the team finds the record.
+        var reference = /^#plus-(FB-[A-Z0-9]{4,8})$/.exec(window.location.hash);
+        if (reference) {
+          message.value = 'About my Plus subscription. Reference: ' + reference[1] + '\n\n';
+          counted();
+        }
         form.addEventListener('submit', function (event) {
           event.preventDefault();
           if (!form.reportValidity()) return;
