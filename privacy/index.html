@@ -14,7 +14,7 @@
     </header>
     <main>
       <h1>Privacy policy</h1>
-      <p class="updated">Last updated 12 November 2026</p>
+      <p class="updated">Last updated 13 November 2026</p>
 
       <h2>Who is responsible</h2>
       <p>
@@ -313,28 +313,77 @@
         that member gets the same check before the box is theirs. We keep whether a checked member
         passed. We do this to keep the competition fair (Art. 6(1)(b) and (f) GDPR).
       </p>
-      <p>
+      <p id="photo-check">
         <strong>The photo check (Season)</strong>: every live fistbump photo taken in the app for
-        a meeting that falls in a Season is checked automatically, usually within a day, by
-        Claude, an AI model run by Anthropic, PBC (USA), our processor for this check. We send the
-        photo and nothing else: no names, handles, ids, dates, places or the pose. The model
-        answers three fixed questions: how many clear faces the photo shows, whether a fistbump is
-        visible, and whether it is a real camera photo rather than a generated, edited or
+        a meeting that falls in a Season is checked, usually within a day, so that Season points
+        are given only for meetings that happened. Unless you or the person you met chose a
+        check by a person (see “Your choice” below), the photo is sent to Claude, an AI model run
+        by Anthropic. We use it under Anthropic’s Commercial Terms of Service and its data
+        processing addendum. Under those terms the contracting company for customers in the
+        European Economic Area is Anthropic Ireland, Limited (Ireland). It acts as our processor
+        and uses other companies of its group and further sub-processors, which it lists at
+        <a href="https://trust.anthropic.com/subprocessors">trust.anthropic.com/subprocessors</a>.
+      </p>
+      <p>
+        <strong>What is sent and what the model does</strong>: we send the picture and nothing
+        else: no names, handles, ids, dates, places or the pose, and the copy we send carries no
+        location or other metadata. The model answers three fixed
+        questions: how many clear faces the photo shows, whether a fistbump is visible, and
+        whether it looks like a real camera photo rather than a generated, edited or
         re-photographed one. It is told not to describe or identify anyone, and we store only the
         verdict and a short reason code, never the model’s words. The check counts faces; it never
         matches a face against your profile photo or anyone else’s, and no biometric template is
-        made. Before the photo is sent, our own server compares a coarse fingerprint of the image
-        (64 bits, not a face) with earlier meeting photos to spot a photo used twice; that
-        fingerprint stays with us. Anthropic processes the photo on servers in the United States
-        under its data processing agreement with the EU’s standard contractual clauses, uses it
-        only to give us the answer, does not train on it, and deletes it from its systems within
-        30 days. If a photo is not accepted, both people are told why, can take one new live photo
-        together within 7 days, and can then ask the Fistbump team to look once; a team member
-        then opens the photo, and that is logged like every other photo access. We do this to keep
-        the Season fair and to prevent fraud (Art. 6(1)(f) GDPR, and Art. 6(1)(b) under the Season
-        rules you accept when you join). No decision about you is made by the model alone: the
-        only effect of a refused photo is that a meeting gives no Season points, and you can
-        always ask a person to review it.
+        made. It does not confirm who is in a photo and does not prove that a photo is genuine.
+        Before the photo is sent, our own server compares a coarse fingerprint of the image (64
+        bits, not a face) with earlier meeting photos to spot a photo used twice; that fingerprint
+        stays with us.
+      </p>
+      <p>
+        <strong>Where the photo goes and how long it is kept there</strong>: Anthropic stores what
+        it receives in the United States, and we set every request so that the model runs in the
+        United States only. Anthropic’s sub-processors, which it lists on the page linked above,
+        may be in other countries. Where the photo leaves the
+        European Economic Area, the EU’s standard contractual clauses in Anthropic’s data
+        processing addendum apply. Under its terms Anthropic may not train its models on the
+        photo. According to its published retention rules (as we read them on 13 November 2026),
+        Anthropic deletes what it receives through its interface for developers within 30 days.
+        It may keep a photo longer, up to 2 years, if its automated safety systems flag it as a
+        breach of its usage policy, or where the law requires it. We have not agreed a shorter
+        period with Anthropic.
+      </p>
+      <p>
+        <strong>What the result changes</strong>: the result gives or withholds provisional Season
+        points for both people in the photo. An AI model can make mistakes. If a photo is not
+        accepted, both people are told why, can take one new live photo together within 7 days,
+        and can then ask the Fistbump team to look once; a team member then opens the photo, and
+        that is logged like every other photo access. A verdict of the model that nobody questions
+        stands without a person having looked at it, so a refused photo can lower a member’s
+        place in the ranking. The model does not choose a winner. Before a Season’s winner is
+        announced, a person on the team answers every review that was asked for in that Season,
+        and people on the team check the top places as described under “The Season”. If you think
+        a refusal was wrong, ask for the review: a person then decides.
+      </p>
+      <p>
+        <strong>Your choice</strong>: you can object to the AI check at any time and without
+        giving a reason. In the app: your picture (top right) → Privacy → Season photo check →
+        <em>Have a person check my photos</em>; the same switch is shown where you confirm a
+        meeting and where you take the photo. From then on the live photos of your meetings,
+        including photos another member takes with you, are not sent to Anthropic. A person on
+        the Fistbump team opens and checks them instead (logged like every other photo access),
+        which can take longer than a day. Your points and your place in the Season stay the same.
+        A photo that was already sent cannot be called back. We look your choice up again right
+        before each photo is sent; a photo that is already on its way at the moment you switch
+        this on may still be checked by the model once, and we then discard the model’s answer
+        and a person decides. Our own comparison with earlier meeting photos (the fingerprint
+        described above) runs for these photos too, on our server. We store that you made this choice
+        and when, until you change it or delete your account. Only the two people who met should
+        be in the photo; Fistbump is for adults, so keep children and other people out of the
+        picture.
+      </p>
+      <p>
+        We do this to keep the Season fair and to prevent made-up meetings, which is our
+        legitimate interest (Art. 6(1)(f) GDPR). The choice above is how you use your right to
+        object (Art. 21 GDPR).
       </p>
       <p>
         <strong>Meeting photos</strong>: a photo you add of a meeting is stored privately and shown
@@ -345,8 +394,9 @@
         the time. Photos are deleted with your account (Art. 6(1)(a) and (b) GDPR). The Fistbump
         team opens a private meeting photo only to review a report about it, the meeting or one of
         you (while the report is open or up to 30 days after it was handled), for the Season check
-        described above, or to decide on a Season photo check (for example when you
-        ask for a review of a refused photo, or when the automatic check could not give an answer).
+        described above, or to decide on a Season photo check (when you or the person you met
+        chose a check by a person, when you ask for a review of a refused photo, or when the
+        automatic check could not give an answer).
         Each time is logged: who on the team opened which photo,
         why (the report or the Season) and when. The log keeps member and photo IDs, not the photo,
         for 2 years, and is then deleted. Your data download lists each time the team opened one
@@ -505,9 +555,12 @@
           visitor’s IP address and details of the browser. Signing in with X never shows it.
         </li>
         <li>
-          <strong>Anthropic</strong> (Anthropic, PBC, USA) runs the Claude model that checks the
+          <strong>Anthropic</strong> (under its terms for customers in the European Economic
+          Area: Anthropic Ireland, Limited, Ireland, with companies of its group and
+          sub-processors in the USA and other countries) runs the Claude model that checks the
           Season’s live fistbump photos, as described under “The photo check” above. It receives
-          only the photo, keeps it at most 30 days and does not train on it.
+          only the photo, may not train on it, and normally deletes it within 30 days; the
+          exceptions are listed there.
         </li>
         <li>
           <strong>A research tool</strong>, if we use one for Event Radar or Opportunities (for
@@ -531,14 +584,19 @@
         privacy policies.
       </p>
       <p>
-        Some of these providers are based in the USA (Expo, X Corp., GitHub, Cloudflare, Resend, Anthropic) or may
-        process data outside the EU. We are confirming for each of them which safeguard applies to
-        the transfer (the EU–US Data Privacy Framework or the EU’s standard contractual clauses) and
-        will list it here; until then, write to us for the current state.
+        Some of these providers are based in the USA (Expo, X Corp., GitHub, Cloudflare, Resend) or may
+        process data outside the EU; Anthropic processes data in the USA and possibly other
+        countries. For Anthropic, the EU’s standard contractual clauses in its data processing
+        addendum apply. For the others we are confirming which safeguard applies to the transfer
+        (the EU–US Data Privacy Framework or the EU’s standard contractual clauses) and will list
+        it here; until then, write to us for the current state.
       </p>
       <p>
-        We don’t sell your data, don’t show you advertising based on your data, and don’t make
-        decisions about you based solely on automated processing.
+        We don’t sell your data and don’t show you advertising based on your data. Decisions
+        about your account, your membership and your payments are made by people. The Season
+        photo check uses an AI model (automated processing in the sense of Art. 22 GDPR); what it
+        changes, how a person reviews it and how you can choose a check by a person from the
+        start is described under “The photo check” above.
       </p>
 
       <h2>Cookies and storage</h2>
@@ -569,7 +627,12 @@
         the notes we keep to stop abuse within 3 days. Events are deleted 400 days after
         they end, and messages from the contact form 6 months after they were sent. The verdict of
         a Season photo check (valid or not, and the reason code) stays with the meeting it belongs
-        to; the copy of the photo sent to Anthropic is deleted there within 30 days.
+        to. Anthropic normally deletes the copy of a photo it received within 30 days; “The photo
+        check” above lists the exceptions. Your choice of a check by a person is kept until you
+        change it or delete your account. Our backups run behind: a weekly encrypted backup of
+        stored files can hold a deleted photo for up to about 97 days after you deleted it, the
+        weekly copy of the database (which holds verdicts and the log of photo openings, not
+        photos) is kept 90 days, and our database provider’s daily backups are kept 7 days.
       </p>
 
       <h2>Your rights</h2>
