@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Get Fistbump</title>
+    <meta name="description" content="Get Fistbump on your phone or open it in your browser." />
+    <meta name="robots" content="noindex" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/legal.css" />
+    <script src="/stores.js"></script>
+    <script>
+      // The QR code on the home page, the flyer and the deck points here. An iPhone or iPad goes
+      // to the App Store, an Android phone to Google Play, once that store sells Fistbump;
+      // everything else (a computer, or a store not open yet) goes to the app in the browser.
+      (function () {
+        var stores = window.FISTBUMP_STORES;
+        if (!stores) return;
+        var ua = navigator.userAgent || '';
+        var apple = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+        var android = /Android/.test(ua);
+        var to = stores.web;
+        if (apple && stores.ios.live) to = stores.ios.url;
+        else if (android && stores.android.live) to = stores.android.url;
+        location.replace(to);
+      })();
+    </script>
+    <style>
+      .ways {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 20px;
+      }
+      .ways a {
+        padding: 12px 18px;
+        border-radius: 999px;
+        background: var(--forest);
+        color: #fff;
+        font-weight: 800;
+        text-decoration: none;
+      }
+      .ways a.store {
+        background: var(--card);
+        color: var(--forest);
+        border: 1.5px solid var(--trail);
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a class="brand" href="/"><img src="/favicon.svg" alt="" />fistbump</a>
+    </header>
+    <main>
+      <h1>Get Fistbump</h1>
+      <p>Taking you to Fistbump. If nothing happens, pick one:</p>
+      <p class="ways">
+        <a id="web" href="https://app.fistbump.world/">Open Fistbump in your browser</a>
+        <a class="store" id="ios" hidden>App Store</a>
+        <a class="store" id="android" hidden>Google Play</a>
+      </p>
+      <script>
+        (function () {
+          var stores = window.FISTBUMP_STORES;
+          if (!stores) return;
+          // The addresses come from stores.js, the one place they are written.
+          var ios = document.getElementById('ios'), android = document.getElementById('android');
+          ios.href = stores.ios.url;
+          android.href = stores.android.url;
+          document.getElementById('web').href = stores.web;
+          ios.hidden = !stores.ios.live;
+          android.hidden = !stores.android.live;
+        })();
+      </script>
+      <p><a href="/">Back to fistbump.world</a></p>
+    </main>
+  </body>
+</html>
