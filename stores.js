@@ -3,6 +3,6 @@
 // page shows "Coming soon" instead of that store's button.
 window.FISTBUMP_STORES = {
   ios: { live: false, url: 'https://apps.apple.com/app/id6825308934' },
-  android: { live: false, url: 'https://play.google.com/store/apps/details?id=world.fistbump.app' },
+  android: { live: true, url: 'https://play.google.com/store/apps/details?id=world.fistbump.app' },
   web: 'https://app.fistbump.world/',
 };
