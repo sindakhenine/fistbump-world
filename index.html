@@ -238,7 +238,7 @@
         height: 20px;
         flex-shrink: 0;
       }
-      /* The live line: online now and visits today (public.public_stats), and the stats page.
+      /* The live line: online now, members and openings today (public.public_stats), and the stats page.
          The dot is the app's live green (the /admin and /stats dots). */
       .live {
         display: inline-flex;
@@ -532,8 +532,9 @@
             referrerPolicy: 'no-referrer',
           }).catch(function () {});
         }
-        // "12 online · 340 visits today": totals only, and a number under 3 comes back empty, so
-        // it isn't shown (the same as app.fistbump.world/stats).
+        // "12 online · 9 members today · 340 openings today": totals only, and a number under 3
+        // comes back empty, so it isn't shown (the same as app.fistbump.world/stats). An opening
+        // is each time the app or this website is opened, a member is counted once a day.
         var dot = document.getElementById('live-dot');
         var text = document.getElementById('live-text');
         function count(n) {
@@ -559,10 +560,12 @@
             .then(function (s) {
               if (!s) return clear();
               var online = count(s.online);
+              var members = count(s.members_today);
               var visits = count(s.visits_today);
               var parts = [];
               if (online) parts.push(online + ' online');
-              if (visits) parts.push(visits + ' visits today');
+              if (members) parts.push(members + ' members today');
+              if (visits) parts.push(visits + ' openings today');
               dot.hidden = !online;
               text.textContent = parts.join(' · ');
             })
