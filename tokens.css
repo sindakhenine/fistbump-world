@@ -30,6 +30,17 @@
   --sky-soft: #e6f6fb;
   --sky-ink: #0b5f7d;
   --focus: #127fa6; /* the keyboard focus ring, 3 px */
+  /* A followed place's own colour ("Notify me": up to five places), each with its soft ground. */
+  --place-1: #c2410c;
+  --place-1-soft: #ffede3;
+  --place-2: #127fa6;
+  --place-2-soft: #e6f6fb;
+  --place-3: #b7791f;
+  --place-3-soft: #fdf3dc;
+  --place-4: #2f855a;
+  --place-4-soft: #e3f4ea;
+  --place-5: #be185d;
+  --place-5-soft: #fce7f3;
   --danger: #b42318;
   /* Night: Fistbump Park */
   --night-top: #0d2c23;
