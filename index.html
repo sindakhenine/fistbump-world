@@ -3,12 +3,14 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Fistbump</title>
+    <title>Fistbump: meet the builders you know from X</title>
     <meta
       name="description"
-      content="Fistbump, a new app for builders, is coming soon."
+      content="Fistbump shows the builders you know from X on a world map, so you can meet them for a coffee, a walk or a build session. Free to join."
     />
     <meta name="theme-color" content="#FAFBF6" />
+    <!-- Safari on iPhone offers the App Store app at the top of the page. -->
+    <meta name="apple-itunes-app" content="app-id=6825308934" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -16,19 +18,25 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://fistbump.world/" />
     <meta property="og:site_name" content="Fistbump" />
-    <meta property="og:title" content="Fistbump" />
-    <meta property="og:description" content="A new app for builders, coming soon." />
+    <meta property="og:title" content="Fistbump: meet the builders you know from X" />
+    <meta
+      property="og:description"
+      content="See the builders you know from X on a world map and meet them in person. Free to join."
+    />
     <meta property="og:image" content="https://fistbump.world/og.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta
       property="og:image:alt"
-      content="A small parachute drifting down with a crate stamped with the Fistbump mark."
+      content="The Fistbump parachute carrying the Fistbump logo on a round green badge, next to the words: Meet the builders you know from X, in real life."
     />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@skatalystai" />
-    <meta name="twitter:title" content="Fistbump" />
-    <meta name="twitter:description" content="A new app for builders, coming soon." />
+    <meta name="twitter:title" content="Fistbump: meet the builders you know from X" />
+    <meta
+      name="twitter:description"
+      content="See the builders you know from X on a world map and meet them in person. Free to join."
+    />
     <meta name="twitter:image" content="https://fistbump.world/og.png" />
     <!-- The colours: the same chart as the app (src/theme/tokens.css). -->
     <link rel="stylesheet" href="/tokens.css" />
@@ -67,12 +75,8 @@
       html,
       body {
         margin: 0;
-        min-height: 100%;
       }
       body {
-        min-height: 100svh;
-        display: grid;
-        grid-template-rows: auto 1fr auto;
         background: var(--paper);
         color: var(--forest);
         font:
@@ -86,6 +90,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        gap: 16px;
       }
       /* The logo sits where the app's does, with the same margin. */
       header,
@@ -111,23 +116,36 @@
         width: 32px;
         height: 32px;
       }
-      main {
+      .top-link {
+        color: var(--forest);
+        font-weight: 800;
+        font-size: 15px;
+        text-decoration: none;
+        padding: 10px 16px;
+        border-radius: var(--r-pill);
+        border: 1.5px solid var(--trail);
+        background: var(--card);
+      }
+      .top-link:hover {
+        border-color: var(--forest);
+      }
+      .hero {
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
         text-align: center;
-        padding: 8px 16px 24px;
+        padding: 8px 16px clamp(48px, 9svh, 88px);
       }
       /* The app's own 3D parachute (the one members land with), carrying the Fistbump logo on a
          round shiny badge. When it lands the logo lights up in gold, like the owner's video. */
       .sky {
-        width: min(230px, 26svh, 50vw);
+        width: min(210px, 22svh, 46vw);
       }
       .parachute {
         position: relative;
         display: block;
-        aspect-ratio: 286 / 360;
+        /* Taller than the picture, so the badge's lowest sparkles stay clear of the title. */
+        aspect-ratio: 286 / 375;
         transform-origin: 50% 14%;
         animation:
           drop 2.8s cubic-bezier(0.2, 0.75, 0.25, 1) both,
@@ -185,58 +203,188 @@
       .badge-sparkles g:nth-child(7) use {
         animation-delay: 3.6s;
       }
-      h1 {
-        margin: clamp(18px, 3.5svh, 34px) 0 0;
-        font:
-          800 clamp(40px, min(7.4vw, 10svh), 96px) / 0.96 'Bricolage Grotesque',
-          Manrope,
-          system-ui,
-          sans-serif;
+      h1,
+      h2 {
+        font-family: 'Bricolage Grotesque', Manrope, system-ui, sans-serif;
+        font-weight: 800;
         letter-spacing: -0.03em;
         text-wrap: balance;
-        max-width: 14ch;
       }
-      p {
-        margin: clamp(16px, 2.6svh, 24px) auto clamp(24px, 4svh, 36px);
-        max-width: 32ch;
-        font-size: clamp(17px, 1.6vw, 19px);
+      h1 {
+        margin: clamp(18px, 3svh, 30px) 0 0;
+        font-size: clamp(36px, min(6.2vw, 8.6svh), 76px);
+        line-height: 0.98;
+        max-width: 17ch;
+      }
+      .lead {
+        margin: clamp(16px, 2.4svh, 22px) auto clamp(24px, 3.6svh, 32px);
+        max-width: 40ch;
+        font-size: clamp(17px, 1.6vw, 20px);
         line-height: 1.55;
         color: var(--moss);
-        text-wrap: balance;
+        text-wrap: pretty;
       }
-      .follow {
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+        width: min(100%, 640px);
+      }
+      .open,
+      .store {
         display: inline-flex;
         align-items: center;
-        gap: 12px;
+        justify-content: center;
         min-height: 56px;
-        padding: 0 28px;
         border-radius: var(--r-md);
+        text-decoration: none;
+        transition:
+          background 0.18s,
+          border-color 0.18s,
+          transform 0.18s;
+      }
+      .open {
+        padding: 0 32px;
         background: var(--forest);
         color: var(--paper);
         font:
           800 17px/1.2 Manrope,
           system-ui,
           sans-serif;
-        text-decoration: none;
         box-shadow: var(--shadow-raise);
-        transition:
-          background 0.18s,
-          transform 0.18s;
       }
-      .follow:hover {
+      .open:hover {
         background: var(--forest-hover);
         transform: translateY(-2px);
       }
-      .follow:focus-visible,
+      /* The stores: words only (their logos may only appear in their official badges). */
+      .store {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2px;
+        padding: 0 20px;
+        background: var(--card);
+        color: var(--forest);
+        border: 1.5px solid var(--trail);
+        line-height: 1.1;
+      }
+      .store small {
+        font-size: 12px;
+        color: var(--lichen);
+      }
+      .store strong {
+        font-size: 17px;
+        font-weight: 800;
+      }
+      .store[hidden] {
+        display: none;
+      }
+      .store:hover {
+        border-color: var(--forest);
+        transform: translateY(-2px);
+      }
+      .fine {
+        margin: 16px 0 0;
+        font-size: 14px;
+        color: var(--lichen);
+      }
+      section {
+        padding: clamp(48px, 8svh, 80px) clamp(16px, 4vw, 40px);
+      }
+      .how {
+        background: var(--meadow);
+      }
+      .wrap {
+        max-width: 1120px;
+        margin: 0 auto;
+      }
+      h2 {
+        margin: 0 0 clamp(20px, 3svh, 32px);
+        font-size: clamp(30px, 3.6vw, 40px);
+        line-height: 1.05;
+      }
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+        gap: 16px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      .cards li {
+        padding: 20px 20px 22px;
+        border-radius: var(--r-md);
+        background: var(--card);
+        box-shadow: var(--shadow-float);
+      }
+      .cards img {
+        display: block;
+        width: 56px;
+        height: 56px;
+        margin-bottom: 12px;
+      }
+      h3 {
+        margin: 0 0 6px;
+        font:
+          800 17px/1.3 Manrope,
+          system-ui,
+          sans-serif;
+      }
+      .cards p {
+        margin: 0;
+        font-size: 15px;
+        line-height: 1.55;
+        color: var(--moss);
+      }
+      .cards a {
+        color: var(--forest);
+        font-weight: 800;
+      }
+      /* Plus: the app's gold, on the chart. */
+      .plus {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-top: 16px;
+        padding: 20px;
+        border-radius: var(--r-md);
+        background: var(--sun-soft);
+        color: var(--sun-ink);
+      }
+      .plus img {
+        width: 56px;
+        height: 56px;
+        flex-shrink: 0;
+      }
+      .plus p {
+        margin: 0;
+        font-size: 15px;
+        line-height: 1.55;
+      }
+      .plus strong {
+        color: var(--forest);
+      }
+      .join {
+        text-align: center;
+      }
+      .join h2 {
+        margin-bottom: 12px;
+      }
+      .join .lead {
+        margin-top: 0;
+      }
+      .join .actions {
+        margin: 0 auto;
+      }
+      .open:focus-visible,
+      .store:focus-visible,
+      .top-link:focus-visible,
+      .cards a:focus-visible,
       .brand:focus-visible,
       footer a:focus-visible {
         outline: 3px solid var(--focus);
         outline-offset: 3px;
-      }
-      .follow svg {
-        width: 20px;
-        height: 20px;
-        flex-shrink: 0;
       }
       /* The live line: online now, members and openings today (public.public_stats), and the stats page.
          The dot is the app's live green (the /admin and /stats dots). */
@@ -269,6 +417,7 @@
       footer {
         font-size: 13px;
         color: var(--lichen);
+        border-top: 1px solid var(--trail);
       }
       footer .links {
         display: inline-flex;
@@ -278,6 +427,20 @@
       }
       footer a {
         color: var(--moss);
+      }
+      @media (max-width: 520px) {
+        .actions .open {
+          flex-basis: 100%;
+        }
+        .actions .store {
+          flex: 1;
+          align-items: center;
+        }
+        .plus {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 12px;
+        }
       }
       @keyframes drop {
         0% {
@@ -362,11 +525,47 @@
         .badge-sparkles use {
           animation: none;
         }
-        .follow {
+        .open,
+        .store {
           transition: none;
         }
       }
     </style>
+    <style>
+      /* A store that doesn't sell Fistbump yet: no link, "Coming soon" (stores.js opens it). */
+      .store.soon {
+        opacity: 0.6;
+        cursor: default;
+        pointer-events: none;
+      }
+      /* The QR code only where it helps: a computer with a mouse and a wide window. */
+      .qr-get {
+        display: none;
+      }
+      @media (hover: hover) and (pointer: fine) and (min-width: 900px) {
+        .qr-get {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 16px;
+          margin: 28px 0 0;
+          text-align: start;
+        }
+        .qr-get img {
+          display: block;
+          padding: 8px;
+          border-radius: 16px;
+          background: #fff;
+          box-shadow: 0 2px 10px rgba(30, 58, 44, 0.12);
+        }
+        .qr-get figcaption {
+          max-width: 260px;
+          font-weight: 700;
+          color: var(--forest);
+        }
+      }
+    </style>
+    <script src="/stores.js"></script>
   </head>
   <body>
     <header>
@@ -374,135 +573,274 @@
         <img src="/favicon.svg" alt="" />
         fistbump
       </a>
+      <a class="top-link" href="https://app.fistbump.world/">Open the app</a>
     </header>
     <main>
-      <div class="sky" aria-hidden="true">
-        <span class="parachute">
-          <img class="chute" src="/art/parachute.webp" alt="" width="286" height="275" />
-          <svg class="badge" viewBox="0 0 286 400" width="286" height="400">
-            <defs>
-              <radialGradient id="badge-halo" cx="0" cy="0" r="120" gradientUnits="userSpaceOnUse">
-                <stop offset="0" stop-color="#ffd43b" stop-opacity=".9" />
-                <stop offset=".48" stop-color="#ffd43b" stop-opacity=".55" />
-                <stop offset=".72" stop-color="#f5bd4f" stop-opacity=".18" />
-                <stop offset="1" stop-color="#f5bd4f" stop-opacity="0" />
-              </radialGradient>
-              <radialGradient id="badge-ray" cx="0" cy="0" r="100" gradientUnits="userSpaceOnUse">
-                <stop offset=".5" stop-color="#ffc94a" stop-opacity=".8" />
-                <stop offset="1" stop-color="#ffc94a" stop-opacity="0" />
-              </radialGradient>
-              <linearGradient id="badge-rim" y1="-60" y2="60" x2="0" gradientUnits="userSpaceOnUse">
-                <stop offset="0" stop-color="#b4f0c8" />
-                <stop offset=".5" stop-color="#3c7d59" />
-                <stop offset="1" stop-color="#0f2a1d" />
-              </linearGradient>
-              <radialGradient
-                id="badge-body"
-                cx="-20"
-                cy="-28"
-                r="88"
-                gradientUnits="userSpaceOnUse"
-              >
-                <stop offset="0" stop-color="#5bb383" />
-                <stop offset=".5" stop-color="#24553c" />
-                <stop offset="1" stop-color="#10291d" />
-              </radialGradient>
-              <radialGradient id="badge-warm" cx="0" cy="0" r="48" gradientUnits="userSpaceOnUse">
-                <stop offset="0" stop-color="#ffd43b" stop-opacity=".45" />
-                <stop offset="1" stop-color="#ffd43b" stop-opacity="0" />
-              </radialGradient>
-              <linearGradient
-                id="badge-shine"
-                y1="-56"
-                y2="-16"
-                x2="0"
-                gradientUnits="userSpaceOnUse"
-              >
-                <stop offset="0" stop-color="#fff" stop-opacity=".7" />
-                <stop offset="1" stop-color="#fff" stop-opacity="0" />
-              </linearGradient>
-              <linearGradient id="badge-spark" y1="-8" y2="8" x2="0" gradientUnits="userSpaceOnUse">
-                <stop offset="0" stop-color="#fffbe0" />
-                <stop offset="1" stop-color="#ffc21a" />
-              </linearGradient>
-              <filter id="badge-glow" x="-30%" y="-30%" width="160%" height="160%">
-                <feGaussianBlur in="SourceAlpha" stdDeviation="2.6" result="blur" />
-                <feFlood flood-color="#ffd43b" />
-                <feComposite in2="blur" operator="in" result="gold" />
-                <feMerge>
-                  <feMergeNode in="gold" />
-                  <feMergeNode in="gold" />
-                  <feMergeNode in="SourceGraphic" />
-                </feMerge>
-              </filter>
-              <filter id="badge-soft" x="-20%" y="-20%" width="140%" height="140%">
-                <feGaussianBlur stdDeviation="1.6" />
-              </filter>
-              <path id="badge-star" d="M0-8C1-2 2-1 8 0C2 1 1 2 0 8C-1 2-2 1-8 0C-2-1-1-2 0-8Z" />
-            </defs>
-            <!-- The parachute's strings, carried on down to the badge. -->
-            <path
-              d="M84.8 256L99.8 274.8M93.6 256L102.2 270.4M104 240L111.6 260.2M109 240L113.6 258.4M121.1 232L123.2 252.5M160.6 216L159.7 248.2M165.5 216L161.4 248.6M200.1 232L190.9 265.9M209.8 240L198.3 275.8M212.8 248L199.2 278.1M217.4 248L199 278.6"
-              stroke="#c9cdcf"
-              stroke-width="1.8"
-              stroke-linecap="round"
-            />
-            <g transform="translate(148 304)">
-              <g class="badge-light">
-                <circle class="badge-halo" r="120" fill="url(#badge-halo)" />
-                <path
-                  class="badge-rays"
-                  fill="url(#badge-ray)"
-                  filter="url(#badge-soft)"
-                  d="M0 0L-5.2-99.9L5.2-99.9ZM0 0L25.7-69.4L30.9-67.2ZM0 0L66.9-74.3L74.3-66.9ZM0 0L67.2-30.9L69.4-25.7ZM0 0L99.9-5.2L99.9 5.2ZM0 0L69.4 25.7L67.2 30.9ZM0 0L74.3 66.9L66.9 74.3ZM0 0L30.9 67.2L25.7 69.4ZM0 0L5.2 99.9L-5.2 99.9ZM0 0L-25.7 69.4L-30.9 67.2ZM0 0L-66.9 74.3L-74.3 66.9ZM0 0L-67.2 30.9L-69.4 25.7ZM0 0L-99.9 5.2L-99.9-5.2ZM0 0L-69.4-25.7L-67.2-30.9ZM0 0L-74.3-66.9L-66.9-74.3ZM0 0L-30.9-67.2L-25.7-69.4Z"
-                />
+      <div class="hero">
+        <div class="sky" aria-hidden="true">
+          <span class="parachute">
+            <img class="chute" src="/art/parachute.webp" alt="" width="286" height="275" />
+            <svg class="badge" viewBox="0 0 286 400" width="286" height="400">
+              <defs>
+                <radialGradient
+                  id="badge-halo"
+                  cx="0"
+                  cy="0"
+                  r="120"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop offset="0" stop-color="#ffd43b" stop-opacity=".9" />
+                  <stop offset=".48" stop-color="#ffd43b" stop-opacity=".55" />
+                  <stop offset=".72" stop-color="#f5bd4f" stop-opacity=".18" />
+                  <stop offset="1" stop-color="#f5bd4f" stop-opacity="0" />
+                </radialGradient>
+                <radialGradient id="badge-ray" cx="0" cy="0" r="100" gradientUnits="userSpaceOnUse">
+                  <stop offset=".5" stop-color="#ffc94a" stop-opacity=".8" />
+                  <stop offset="1" stop-color="#ffc94a" stop-opacity="0" />
+                </radialGradient>
+                <linearGradient
+                  id="badge-rim"
+                  y1="-60"
+                  y2="60"
+                  x2="0"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop offset="0" stop-color="#b4f0c8" />
+                  <stop offset=".5" stop-color="#3c7d59" />
+                  <stop offset="1" stop-color="#0f2a1d" />
+                </linearGradient>
+                <radialGradient
+                  id="badge-body"
+                  cx="-20"
+                  cy="-28"
+                  r="88"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop offset="0" stop-color="#5bb383" />
+                  <stop offset=".5" stop-color="#24553c" />
+                  <stop offset="1" stop-color="#10291d" />
+                </radialGradient>
+                <radialGradient id="badge-warm" cx="0" cy="0" r="48" gradientUnits="userSpaceOnUse">
+                  <stop offset="0" stop-color="#ffd43b" stop-opacity=".45" />
+                  <stop offset="1" stop-color="#ffd43b" stop-opacity="0" />
+                </radialGradient>
+                <linearGradient
+                  id="badge-shine"
+                  y1="-56"
+                  y2="-16"
+                  x2="0"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop offset="0" stop-color="#fff" stop-opacity=".7" />
+                  <stop offset="1" stop-color="#fff" stop-opacity="0" />
+                </linearGradient>
+                <linearGradient
+                  id="badge-spark"
+                  y1="-8"
+                  y2="8"
+                  x2="0"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop offset="0" stop-color="#fffbe0" />
+                  <stop offset="1" stop-color="#ffc21a" />
+                </linearGradient>
+                <filter id="badge-glow" x="-30%" y="-30%" width="160%" height="160%">
+                  <feGaussianBlur in="SourceAlpha" stdDeviation="2.6" result="blur" />
+                  <feFlood flood-color="#ffd43b" />
+                  <feComposite in2="blur" operator="in" result="gold" />
+                  <feMerge>
+                    <feMergeNode in="gold" />
+                    <feMergeNode in="gold" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+                <filter id="badge-soft" x="-20%" y="-20%" width="140%" height="140%">
+                  <feGaussianBlur stdDeviation="1.6" />
+                </filter>
+                <path id="badge-star" d="M0-8C1-2 2-1 8 0C2 1 1 2 0 8C-1 2-2 1-8 0C-2-1-1-2 0-8Z" />
+              </defs>
+              <!-- The parachute's strings, carried on down to the badge. -->
+              <path
+                d="M84.8 256L99.8 274.8M93.6 256L102.2 270.4M104 240L111.6 260.2M109 240L113.6 258.4M121.1 232L123.2 252.5M160.6 216L159.7 248.2M165.5 216L161.4 248.6M200.1 232L190.9 265.9M209.8 240L198.3 275.8M212.8 248L199.2 278.1M217.4 248L199 278.6"
+                stroke="#c9cdcf"
+                stroke-width="1.8"
+                stroke-linecap="round"
+              />
+              <g transform="translate(148 304)">
+                <g class="badge-light">
+                  <circle class="badge-halo" r="120" fill="url(#badge-halo)" />
+                  <path
+                    class="badge-rays"
+                    fill="url(#badge-ray)"
+                    filter="url(#badge-soft)"
+                    d="M0 0L-5.2-99.9L5.2-99.9ZM0 0L25.7-69.4L30.9-67.2ZM0 0L66.9-74.3L74.3-66.9ZM0 0L67.2-30.9L69.4-25.7ZM0 0L99.9-5.2L99.9 5.2ZM0 0L69.4 25.7L67.2 30.9ZM0 0L74.3 66.9L66.9 74.3ZM0 0L30.9 67.2L25.7 69.4ZM0 0L5.2 99.9L-5.2 99.9ZM0 0L-25.7 69.4L-30.9 67.2ZM0 0L-66.9 74.3L-74.3 66.9ZM0 0L-67.2 30.9L-69.4 25.7ZM0 0L-99.9 5.2L-99.9-5.2ZM0 0L-69.4-25.7L-67.2-30.9ZM0 0L-74.3-66.9L-66.9-74.3ZM0 0L-30.9-67.2L-25.7-69.4Z"
+                  />
+                </g>
+                <g class="badge-ball">
+                  <circle r="60" fill="url(#badge-rim)" />
+                  <circle r="54.5" fill="url(#badge-body)" />
+                  <circle r="48" fill="url(#badge-warm)" />
+                  <!-- The Fistbump logo, as in the app icon. -->
+                  <path
+                    d="M7 24L13 18L20 18L24 23L24 29L18 32L12 30L7 33M41 24L35 18L28 18L24 23L24 29L30 32L36 30L41 33M19 18V24H15M29 18V24H33M24 10V13M16 11L18 14M32 11L30 14"
+                    transform="translate(-52.8 -47.3) scale(2.2)"
+                    fill="none"
+                    stroke="#fffdf5"
+                    stroke-width="2.4"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    filter="url(#badge-glow)"
+                  />
+                  <ellipse cy="-36" rx="38" ry="19" fill="url(#badge-shine)" />
+                </g>
+                <g class="badge-sparkles" fill="url(#badge-spark)">
+                  <g transform="translate(-96 -14) scale(2)"><use href="#badge-star" /></g>
+                  <g transform="translate(90 -40) scale(1.5)"><use href="#badge-star" /></g>
+                  <g transform="translate(104 26) scale(2.2)"><use href="#badge-star" /></g>
+                  <g transform="translate(-84 50) scale(1.4)"><use href="#badge-star" /></g>
+                  <g transform="translate(-44 84) scale(1.7)"><use href="#badge-star" /></g>
+                  <g transform="translate(60 78) scale(1.5)"><use href="#badge-star" /></g>
+                  <g transform="translate(-112 -64) scale(1.1)"><use href="#badge-star" /></g>
+                </g>
               </g>
-              <g class="badge-ball">
-                <circle r="60" fill="url(#badge-rim)" />
-                <circle r="54.5" fill="url(#badge-body)" />
-                <circle r="48" fill="url(#badge-warm)" />
-                <!-- The Fistbump logo, as in the app icon. -->
-                <path
-                  d="M7 24L13 18L20 18L24 23L24 29L18 32L12 30L7 33M41 24L35 18L28 18L24 23L24 29L30 32L36 30L41 33M19 18V24H15M29 18V24H33M24 10V13M16 11L18 14M32 11L30 14"
-                  transform="translate(-52.8 -47.3) scale(2.2)"
-                  fill="none"
-                  stroke="#fffdf5"
-                  stroke-width="2.4"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  filter="url(#badge-glow)"
-                />
-                <ellipse cy="-36" rx="38" ry="19" fill="url(#badge-shine)" />
-              </g>
-              <g class="badge-sparkles" fill="url(#badge-spark)">
-                <g transform="translate(-96 -14) scale(2)"><use href="#badge-star" /></g>
-                <g transform="translate(90 -40) scale(1.5)"><use href="#badge-star" /></g>
-                <g transform="translate(104 26) scale(2.2)"><use href="#badge-star" /></g>
-                <g transform="translate(-84 50) scale(1.4)"><use href="#badge-star" /></g>
-                <g transform="translate(-44 84) scale(1.7)"><use href="#badge-star" /></g>
-                <g transform="translate(60 78) scale(1.5)"><use href="#badge-star" /></g>
-                <g transform="translate(-112 -64) scale(1.1)"><use href="#badge-star" /></g>
-              </g>
-            </g>
-          </svg>
-        </span>
+            </svg>
+          </span>
+        </div>
+        <h1>Meet the builders you know from X, in real life.</h1>
+        <p class="lead">
+          Fistbump puts the people you follow on X, and the people who follow you, on a world map.
+          Suggest a coffee, a walk or a build session, then meet in person.
+        </p>
+        <!-- deploy-all.sh holds this page back until the app opens: it looks for id="open-app". -->
+        <div class="actions">
+          <a class="open" id="open-app" href="https://app.fistbump.world/">Open the app</a>
+          <a class="store soon" data-store="ios" data-label="iPhone and iPad" aria-disabled="true" rel="noopener">
+            <small>Coming soon</small>
+            <strong>App Store</strong>
+          </a>
+          <a class="store soon" data-store="android" data-label="Android" aria-disabled="true" rel="noopener">
+            <small>Coming soon</small>
+            <strong>Google Play</strong>
+          </a>
+        </div>
+        <p class="fine">Free to join. You sign in with X.</p>
+        <p class="live">
+          <span class="live-dot" id="live-dot" aria-hidden="true" hidden></span>
+          <span id="live-text"></span>
+          <a href="https://app.fistbump.world/stats">Live stats</a>
+        </p>
       </div>
-      <h1>Fistbump is coming soon.</h1>
-      <p>A new app for builders. The first look goes out on X.</p>
-      <a class="follow" href="https://x.com/skatalystai" rel="noopener">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path
-            fill="currentColor"
-            d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3l-4.9-7.4L5.5 22H2.3l7.4-8.5L1 2h6.5l4.5 6.8L18.9 2Zm-1.1 18h1.7L6.6 3.9H4.8L17.8 20Z"
-          />
-        </svg>
-        Follow @skatalystai on X
-      </a>
-      <p class="live">
-        <span class="live-dot" id="live-dot" aria-hidden="true" hidden></span>
-        <span id="live-text"></span>
-        <a href="https://app.fistbump.world/stats">Live stats</a>
-      </p>
+
+      <section class="how" aria-labelledby="how">
+        <div class="wrap">
+          <h2 id="how">How it works</h2>
+          <ol class="cards">
+            <li>
+              <img src="/art/globe.webp" alt="" width="56" height="56" />
+              <h3>Your X people on a map</h3>
+              <p>
+                See the people you follow, and the people who follow you, who use Fistbump. Each
+                member shows a country or a city, never an address.
+              </p>
+            </li>
+            <li>
+              <img src="/art/wave.webp" alt="" width="56" height="56" />
+              <h3>Ping for a coffee</h3>
+              <p>
+                Suggest a coffee, a walk or a build session. When they say yes, a chat opens to set
+                the time and place.
+              </p>
+            </li>
+            <li>
+              <img src="/art/fistbump.webp" alt="" width="56" height="56" />
+              <h3>Meet and fistbump</h3>
+              <p>
+                Take a fistbump photo together and both confirm the meeting. Your fistbumps add up
+                on your profile.
+              </p>
+            </li>
+            <li>
+              <img src="/art/plane.webp" alt="" width="56" height="56" />
+              <h3>Say where you’ll be</h3>
+              <p>
+                In Lisbon next week? Tell your followers, the people you follow, or builders near
+                the place.
+              </p>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section aria-labelledby="more">
+        <div class="wrap">
+          <h2 id="more">Also in Fistbump</h2>
+          <ul class="cards">
+            <li>
+              <img src="/art/trophy.webp" alt="" width="56" height="56" />
+              <h3>The Season</h3>
+              <p>
+                Season 1 runs from 15 November 2026 to 31 March 2027 (Berlin time), so meetings from
+                launch day count. Free and Plus earn points the same way. Each new builder you meet in person
+                earns 1 point in your own country, and 8 points for the one who travelled to meet
+                outside their home country. Every fistbump photo is checked.
+                <a href="https://app.fistbump.world/rules">The Season rules</a>
+              </p>
+            </li>
+            <li>
+              <img src="/art/dice.webp" alt="" width="56" height="56" />
+              <h3>Fistbump Park</h3>
+              <p>
+                Quick games with your connections or against bots, between meetings. Just for fun:
+                games never count for the Season.
+              </p>
+            </li>
+            <li>
+              <img src="/art/padlock.webp" alt="" width="56" height="56" />
+              <h3>Privacy and safety</h3>
+              <p>
+                Every member signs in with their own X account, and only a country or a city is
+                shown. Block or report anyone, and download your data or delete your account at any
+                time.
+              </p>
+            </li>
+          </ul>
+          <div class="plus">
+            <img src="/art/star.webp" alt="" width="56" height="56" />
+            <p>
+              <strong>Fistbump is free.</strong> Fistbump Plus is an optional monthly or yearly
+              subscription: meet builders outside your X network, hear when they are in your town,
+              write your own invitations, host small events and play more games. Cancel any time.
+              The first 1,000 members get a Founding member badge; the first 100 members who pay for
+              Plus get a Founding Plus badge, and on the website 20% off the first month of a
+              monthly subscription.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="join how" aria-labelledby="join">
+        <div class="wrap">
+          <h2 id="join">Join Fistbump</h2>
+          <p class="lead">
+            Sign in with X on the web, or get the app. Fistbump is for builders aged 18 and over.
+          </p>
+          <div class="actions">
+            <a class="open" href="https://app.fistbump.world/">Open the app</a>
+            <a class="store soon" data-store="ios" data-label="iPhone and iPad" aria-disabled="true" rel="noopener">
+              <small>Coming soon</small>
+              <strong>App Store</strong>
+            </a>
+            <a class="store soon" data-store="android" data-label="Android" aria-disabled="true" rel="noopener">
+              <small>Coming soon</small>
+              <strong>Google Play</strong>
+            </a>
+          </div>
+          <figure class="qr-get">
+            <img src="/art/get-qr.svg" alt="QR code to fistbump.world/get" width="132" height="132" />
+            <figcaption>On a computer? Scan with your phone to get Fistbump there.</figcaption>
+          </figure>
+        </div>
+      </section>
     </main>
     <footer>
       <span class="links">
@@ -513,6 +851,23 @@
         <span>© 2026 Fistbump</span>
       </span>
     </footer>
+    <script>
+      (function () {
+        var stores = window.FISTBUMP_STORES;
+        if (!stores) return;
+        // Every store button starts as "Coming soon" without a link (also without JavaScript);
+        // a store marked live in stores.js gets its link and its label here.
+        document.querySelectorAll('a[data-store]').forEach(function (a) {
+          var store = stores[a.getAttribute('data-store')];
+          if (!store || !store.live) return;
+          a.setAttribute('href', store.url);
+          a.classList.remove('soon');
+          a.removeAttribute('aria-disabled');
+          var small = a.querySelector('small');
+          if (small) small.textContent = a.getAttribute('data-label');
+        });
+      })();
+    </script>
     <script>
       // One visit to this page, added to a daily total for the team (public.count_visit), and while
       // the page is in front one beat a minute to that minute's total, for "online now"
